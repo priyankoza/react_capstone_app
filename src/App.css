@@ -594,3 +594,15 @@ img.photo {
 .booking-form input[type="submit"]:hover {
   background-color: var(--secondary-salmon);
 }
+
+.confirmed-booking {
+  text-align: center;
+}
+
+.confirmed-booking h2 {
+  color: var(--primary-green);
+}
+
+.confirmed-booking p {
+  margin: 0 auto 1.5rem;
+}

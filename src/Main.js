@@ -1,21 +1,22 @@
 import { useReducer } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 import HomePage from './HomePage';
 import BookingPage from './BookingPage';
+import ConfirmedBooking from './ConfirmedBooking';
 import Chicago from './Chicago';
+import { fetchAPI, submitAPI } from './api';
 
-// Creates the initial state for availableTimes
+// Initial times: available slots for today's date
 export const initializeTimes = () => {
-  return ['17:00', '18:00', '19:00', '20:00', '21:00', '22:00'];
+  const today = new Date();
+  return fetchAPI(today);
 };
 
-// Reducer: changes availableTimes based on the selected date.
-// For now it returns the same times regardless of the date.
+// Reducer: fetch available slots for the selected date
 export const updateTimes = (state, action) => {
   switch (action.type) {
     case 'UPDATE_TIMES':
-      // action.date holds the newly selected date (used in a later exercise)
-      return initializeTimes();
+      return fetchAPI(new Date(action.date));
     default:
       return state;
   }
@@ -32,6 +33,13 @@ function ComingSoon() {
 
 function Main() {
   const [availableTimes, dispatch] = useReducer(updateTimes, [], initializeTimes);
+  const navigate = useNavigate();
+
+  const submitForm = (formData) => {
+    if (submitAPI(formData)) {
+      navigate('/confirmed');
+    }
+  };
 
   return (
     <main className="site-main">
@@ -40,9 +48,14 @@ function Main() {
         <Route
           path="/booking"
           element={
-            <BookingPage availableTimes={availableTimes} dispatch={dispatch} />
+            <BookingPage
+              availableTimes={availableTimes}
+              dispatch={dispatch}
+              submitForm={submitForm}
+            />
           }
         />
+        <Route path="/confirmed" element={<ConfirmedBooking />} />
         <Route path="/about" element={<Chicago />} />
         <Route path="*" element={<ComingSoon />} />
       </Routes>
