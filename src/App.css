@@ -1,38 +1,720 @@
-.App {
-  text-align: center;
+/* ===== Brand tokens ===== */
+:root {
+  --primary-green: #495e57;
+  --primary-yellow: #f4ce14;
+  --secondary-salmon: #ee9972;
+  --secondary-peach: #fbdabb;
+  --highlight-light: #edefee;
+  --highlight-dark: #333333;
+  --max-width: 1100px;
+  --gutter: 1rem;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+* {
+  box-sizing: border-box;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+body {
+  margin: 0;
+  font-family: "Karla", sans-serif;
+  color: var(--highlight-dark);
 }
 
-.App-header {
-  background-color: #282c34;
+h1,
+h2,
+h3 {
+  font-family: "Markazi Text", serif;
+}
+
+/* ===== Page layout: CSS Grid on the root ===== */
+/* App returns a fragment, so its children sit directly inside #root */
+#root {
+  display: grid;
   min-height: 100vh;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto auto 1fr auto;
+  grid-template-areas:
+    "header"
+    "nav"
+    "main"
+    "footer";
+}
+
+.site-header {
+  grid-area: header;
+}
+
+.site-nav {
+  grid-area: nav;
+}
+
+.site-main {
+  grid-area: main;
+}
+
+.site-footer {
+  grid-area: footer;
+}
+
+/* Reusable centered container */
+.container {
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+/* ===== Header ===== */
+.site-header {
+  display: flex;
+  justify-content: center;
+  padding: var(--gutter);
+}
+
+.site-header img {
+  height: 50px;
+}
+
+/* ===== Nav: Flexbox ===== */
+.site-nav ul {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  gap: 0.75rem;
+  list-style: none;
+  margin: 0;
+  padding: 0 var(--gutter) var(--gutter);
 }
 
-.App-link {
-  color: #61dafb;
+.site-nav a {
+  color: var(--highlight-dark);
+  font-weight: 700;
+  text-decoration: none;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.site-nav a:hover,
+.site-nav a:focus {
+  color: var(--primary-green);
+  text-decoration: underline;
+}
+
+/* ===== Footer: CSS Grid columns ===== */
+.site-footer {
+  background-color: var(--primary-green);
+  color: var(--highlight-light);
+  padding: 2rem 0;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+.site-footer h4 {
+  color: var(--primary-yellow);
+  margin-top: 0;
+}
+
+.site-footer ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.site-footer a {
+  color: var(--highlight-light);
+  text-decoration: none;
+}
+
+.site-footer a:hover {
+  text-decoration: underline;
+}
+
+.site-footer address {
+  font-style: normal;
+}
+
+/* ===== Tablet and up ===== */
+@media (min-width: 768px) {
+  .footer-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
-  to {
-    transform: rotate(360deg);
+
+  .site-nav ul {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem;
+  }
+}
+
+/* ===== Desktop: header and nav share one row ===== */
+@media (min-width: 1024px) {
+  #root {
+    grid-template-columns: 1fr 2fr;
+    grid-template-areas:
+      "header nav"
+      "main   main"
+      "footer footer";
+    grid-template-rows: auto 1fr auto;
+  }
+
+  .site-header {
+    justify-content: flex-start;
+    padding-left: 2rem;
+  }
+
+  .site-nav {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 2rem;
+  }
+
+  .site-nav ul {
+    padding: 0;
+    gap: 2rem;
+  }
+
+  .footer-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+h1 {
+  font-family: "Markazi Text", serif;
+  font-size: 4rem;
+  /* 64px - Display title */
+  font-weight: 500;
+  line-height: 1;
+  color: var(--primary-yellow);
+  margin: 0 0 0.25rem;
+}
+
+h2 {
+  font-family: "Markazi Text", serif;
+  font-size: 2.5rem;
+  /* 40px - Subtitle */
+  font-weight: 400;
+  line-height: 1.1;
+  color: var(--primary-green);
+  margin: 0 0 1rem;
+}
+
+h3 {
+  font-family: "Karla", sans-serif;
+  font-size: 1.25rem;
+  /* 20px - Section title */
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--highlight-dark);
+  margin: 0 0 0.75rem;
+}
+
+h4 {
+  font-family: "Karla", sans-serif;
+  font-size: 1.125rem;
+  /* 18px - Card title */
+  font-weight: 700;
+  margin: 0 0 0.5rem;
+}
+
+h5 {
+  font-family: "Karla", sans-serif;
+  font-size: 1rem;
+  /* 16px - Section categories */
+  font-weight: 800;
+  margin: 0 0 0.5rem;
+}
+
+h6 {
+  font-family: "Karla", sans-serif;
+  font-size: 0.875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin: 0 0 0.5rem;
+}
+
+p {
+  font-family: "Karla", sans-serif;
+  font-size: 1rem;
+  /* 16px - Paragraph text */
+  font-weight: 400;
+  line-height: 1.5;
+  max-width: 65ch;
+  /* keeps lines readable */
+  margin: 0 0 1rem;
+}
+
+/* Lead text, e.g. under the hero heading */
+p.lead {
+  font-size: 1.125rem;
+  /* 18px */
+  font-weight: 500;
+}
+
+span {
+  font-family: "Karla", sans-serif;
+  font-weight: 500;
+}
+
+/* Highlight text, e.g. prices or the subtitle "Chicago" */
+span.highlight {
+  color: var(--secondary-salmon);
+  font-weight: 700;
+}
+
+.site-nav {
+  font-family: "Karla", sans-serif;
+  background-color: #ffffff;
+}
+
+.site-nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.site-nav li {
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.site-nav li a {
+  display: inline-block;
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+  color: var(--highlight-dark);
+  text-decoration: none;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.site-nav li a:hover,
+.site-nav li a:focus-visible {
+  background-color: var(--highlight-light);
+  color: var(--primary-green);
+  text-decoration: none;
+}
+
+/* Footer lists reuse the same ul/li reset */
+footer ul {
+  list-style: none;
+  padding: 0;
+}
+
+footer li {
+  margin-bottom: 0.5rem;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  /* never overflow on small screens */
+  height: auto;
+}
+
+img.photo {
+  width: 100%;
+  object-fit: cover;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Logos stay crisp with no rounding or shadow */
+.site-header img,
+.site-footer img {
+  border-radius: 0;
+  box-shadow: none;
+}
+
+@media (max-width: 767px) {
+  h1 {
+    font-size: 3rem;
+    /* 48px */
+  }
+
+  h2 {
+    font-size: 2rem;
+    /* 32px */
+  }
+
+  p.lead {
+    font-size: 1rem;
+  }
+}
+
+.page-section {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+
+.button-primary {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  background-color: var(--primary-yellow);
+  color: var(--highlight-dark);
+  font-family: "Karla", sans-serif;
+  font-weight: 700;
+  text-decoration: none;
+  border-radius: 16px;
+  transition: background-color 0.2s ease;
+}
+
+.button-primary:hover,
+.button-primary:focus-visible {
+  background-color: var(--secondary-salmon);
+}
+
+/* ----- CallToAction (hero) ----- */
+.hero {
+  background-color: var(--primary-green);
+  color: var(--highlight-light);
+  padding: 3rem 0;
+}
+
+.hero h2 {
+  color: var(--highlight-light);
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  align-items: center;
+}
+
+.hero-image {
+  max-height: 360px;
+}
+
+/* ----- Specials ----- */
+.section-heading {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.section-heading h2 {
+  margin: 0;
+  color: var(--highlight-dark);
+}
+
+.specials-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--highlight-light);
+  border-radius: 16px 16px 0 0;
+  overflow: hidden;
+}
+
+.card-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  padding: 1.25rem;
+}
+
+.card-title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 0.75rem;
+}
+
+.card-body p {
+  color: var(--primary-green);
+  flex-grow: 1;
+}
+
+.card-link {
+  color: var(--highlight-dark);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.card-link:hover {
+  text-decoration: underline;
+}
+
+/* ----- CustomersSay (testimonials) ----- */
+.testimonials {
+  background-color: var(--highlight-light);
+}
+
+.testimonials h2 {
+  text-align: center;
+}
+
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+.testimonial-card {
+  background-color: #ffffff;
+  padding: 1.25rem;
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.stars {
+  color: var(--primary-yellow);
+  font-size: 1.25rem;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.75rem;
+}
+
+.customer {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.customer h5 {
+  margin: 0;
+}
+
+.avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: var(--primary-green);
+  color: var(--highlight-light);
+  font-weight: 700;
+}
+
+/* ----- Chicago (about) ----- */
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  align-items: center;
+}
+
+.about-title {
+  color: var(--primary-green);
+}
+
+.about-images {
+  position: relative;
+  height: 320px;
+}
+
+.about-images img {
+  position: absolute;
+  width: 65%;
+  height: 240px;
+}
+
+.about-img-back {
+  top: 0;
+  right: 0;
+}
+
+.about-img-front {
+  bottom: 0;
+  left: 0;
+}
+
+/* ----- Tablet and up ----- */
+@media (min-width: 768px) {
+
+  .hero-grid,
+  .about-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .specials-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .testimonials-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ----- Desktop ----- */
+@media (min-width: 1024px) {
+  .specials-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .testimonials-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .about-images {
+    height: 400px;
+  }
+
+  .about-images img {
+    height: 300px;
+  }
+}
+
+/* ----- Booking form ----- */
+.booking-form {
+  display: grid;
+  max-width: 400px;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+.booking-form label {
+  font-weight: 700;
+  color: var(--primary-green);
+}
+
+.booking-form input,
+.booking-form select {
+  padding: 0.75rem;
+  font-family: "Karla", sans-serif;
+  font-size: 1rem;
+  border: 1px solid var(--primary-green);
+  border-radius: 8px;
+  background-color: #ffffff;
+  margin-bottom: 0.5rem;
+}
+
+.booking-form input:focus,
+.booking-form select:focus {
+  outline: 2px solid var(--primary-yellow);
+  outline-offset: 1px;
+}
+
+.booking-form input[type="submit"] {
+  background-color: var(--primary-yellow);
+  color: var(--highlight-dark);
+  font-weight: 700;
+  border: none;
+  border-radius: 16px;
+  cursor: pointer;
+  margin-top: 0.5rem;
+}
+
+.booking-form input[type="submit"]:hover {
+  background-color: var(--secondary-salmon);
+}
+
+.confirmed-booking {
+  text-align: center;
+}
+
+.confirmed-booking h2 {
+  color: var(--primary-green);
+}
+
+.confirmed-booking p {
+  margin: 0 auto 1.5rem;
+}
+
+/* ----- Booking form validation ----- */
+.field-error {
+  color: #b00020;
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin: -0.25rem 0 0.5rem;
+}
+
+.booking-form input[aria-invalid="true"],
+.booking-form select[aria-invalid="true"] {
+  border-color: #b00020;
+}
+
+.booking-form input[type="submit"]:disabled {
+  background-color: var(--highlight-light);
+  color: #8a8a8a;
+  cursor: not-allowed;
+}
+
+.booking-form input[type="submit"]:disabled:hover {
+  background-color: var(--highlight-light);
+}
+
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 1rem;
+  z-index: 100;
+  padding: 0.75rem 1rem;
+  background-color: var(--primary-yellow);
+  color: var(--highlight-dark);
+  font-weight: 700;
+  border-radius: 8px;
+}
+
+.skip-link:focus {
+  top: 1rem;
+}
+
+/* Visible keyboard focus everywhere */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible {
+  outline: 3px solid var(--primary-yellow);
+  outline-offset: 2px;
+}
+
+/* Highlight the current page in the nav */
+.site-nav a[aria-current="page"] {
+  color: var(--primary-green);
+  text-decoration: underline;
+}
+
+/* Keep heading sizes after the h1/h4 changes */
+.about-title {
+  font-size: 4rem;
+  color: var(--primary-green);
+  margin-bottom: 0;
+}
+
+.about-subtitle {
+  font-family: "Markazi Text", serif;
+  font-size: 2.5rem;
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: 0;
+  color: var(--highlight-dark);
+}
+
+.card-title {
+  font-family: "Karla", sans-serif;
+  font-size: 1.125rem;
+  font-weight: 700;
+  text-transform: none;
+  letter-spacing: 0;
+  margin: 0;
+}
+
+/* Respect users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    animation: none !important;
   }
 }
