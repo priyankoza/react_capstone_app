@@ -1,38 +1,329 @@
-.App {
-  text-align: center;
+/* ===== Brand tokens ===== */
+:root {
+  --primary-green: #495e57;
+  --primary-yellow: #f4ce14;
+  --secondary-salmon: #ee9972;
+  --secondary-peach: #fbdabb;
+  --highlight-light: #edefee;
+  --highlight-dark: #333333;
+  --max-width: 1100px;
+  --gutter: 1rem;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+* {
+  box-sizing: border-box;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+body {
+  margin: 0;
+  font-family: "Karla", sans-serif;
+  color: var(--highlight-dark);
 }
 
-.App-header {
-  background-color: #282c34;
+h1, h2, h3 {
+  font-family: "Markazi Text", serif;
+}
+
+/* ===== Page layout: CSS Grid on the root ===== */
+/* App returns a fragment, so its children sit directly inside #root */
+#root {
+  display: grid;
   min-height: 100vh;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto auto 1fr auto;
+  grid-template-areas:
+    "header"
+    "nav"
+    "main"
+    "footer";
+}
+
+.site-header { grid-area: header; }
+.site-nav    { grid-area: nav; }
+.site-main   { grid-area: main; }
+.site-footer { grid-area: footer; }
+
+/* Reusable centered container */
+.container {
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+/* ===== Header ===== */
+.site-header {
+  display: flex;
+  justify-content: center;
+  padding: var(--gutter);
+}
+
+.site-header img {
+  height: 50px;
+}
+
+/* ===== Nav: Flexbox ===== */
+.site-nav ul {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  gap: 0.75rem;
+  list-style: none;
+  margin: 0;
+  padding: 0 var(--gutter) var(--gutter);
 }
 
-.App-link {
-  color: #61dafb;
+.site-nav a {
+  color: var(--highlight-dark);
+  font-weight: 700;
+  text-decoration: none;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.site-nav a:hover,
+.site-nav a:focus {
+  color: var(--primary-green);
+  text-decoration: underline;
+}
+
+/* ===== Main ===== */
+.site-main {
+  padding: 2rem 0;
+}
+
+/* ===== Footer: CSS Grid columns ===== */
+.site-footer {
+  background-color: var(--primary-green);
+  color: var(--highlight-light);
+  padding: 2rem 0;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+.site-footer h4 {
+  color: var(--primary-yellow);
+  margin-top: 0;
+}
+
+.site-footer ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.site-footer a {
+  color: var(--highlight-light);
+  text-decoration: none;
+}
+
+.site-footer a:hover {
+  text-decoration: underline;
+}
+
+.site-footer address {
+  font-style: normal;
+}
+
+/* ===== Tablet and up ===== */
+@media (min-width: 768px) {
+  .footer-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
-  to {
-    transform: rotate(360deg);
+
+  .site-nav ul {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem;
+  }
+}
+
+/* ===== Desktop: header and nav share one row ===== */
+@media (min-width: 1024px) {
+  #root {
+    grid-template-columns: 1fr 2fr;
+    grid-template-areas:
+      "header nav"
+      "main   main"
+      "footer footer";
+    grid-template-rows: auto 1fr auto;
+  }
+
+  .site-header {
+    justify-content: flex-start;
+    padding-left: 2rem;
+  }
+
+  .site-nav {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 2rem;
+  }
+
+  .site-nav ul {
+    padding: 0;
+    gap: 2rem;
+  } 
+
+  .footer-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+h1 {
+  font-family: "Markazi Text", serif;
+  font-size: 4rem;          /* 64px - Display title */
+  font-weight: 500;
+  line-height: 1;
+  color: var(--primary-yellow);
+  margin: 0 0 0.25rem;
+}
+
+h2 {
+  font-family: "Markazi Text", serif;
+  font-size: 2.5rem;        /* 40px - Subtitle */
+  font-weight: 400;
+  line-height: 1.1;
+  color: var(--primary-green);
+  margin: 0 0 1rem;
+}
+
+h3 {
+  font-family: "Karla", sans-serif;
+  font-size: 1.25rem;       /* 20px - Section title */
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--highlight-dark);
+  margin: 0 0 0.75rem;
+}
+
+h4 {
+  font-family: "Karla", sans-serif;
+  font-size: 1.125rem;      /* 18px - Card title */
+  font-weight: 700;
+  margin: 0 0 0.5rem;
+}
+
+h5 {
+  font-family: "Karla", sans-serif;
+  font-size: 1rem;          /* 16px - Section categories */
+  font-weight: 800;
+  margin: 0 0 0.5rem;
+}
+
+h6 {
+  font-family: "Karla", sans-serif;
+  font-size: 0.875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin: 0 0 0.5rem;
+}
+
+p {
+  font-family: "Karla", sans-serif;
+  font-size: 1rem;          /* 16px - Paragraph text */
+  font-weight: 400;
+  line-height: 1.5;
+  max-width: 65ch;          /* keeps lines readable */
+  margin: 0 0 1rem;
+}
+
+/* Lead text, e.g. under the hero heading */
+p.lead {
+  font-size: 1.125rem;      /* 18px */
+  font-weight: 500;
+}
+
+span {
+  font-family: "Karla", sans-serif;
+  font-weight: 500;
+}
+
+/* Highlight text, e.g. prices or the subtitle "Chicago" */
+span.highlight {
+  color: var(--secondary-salmon);
+  font-weight: 700;
+}
+
+nav {
+  font-family: "Karla", sans-serif;
+  background-color: #ffffff;
+}
+
+nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+nav li {
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+nav li a {
+  display: inline-block;
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+  color: var(--highlight-dark);
+  text-decoration: none;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+nav li a:hover,
+nav li a:focus-visible {
+  background-color: var(--highlight-light);
+  color: var(--primary-green);
+  text-decoration: none;
+}
+
+/* Footer lists reuse the same ul/li reset */
+footer ul {
+  list-style: none;
+  padding: 0;
+}
+
+footer li {
+  margin-bottom: 0.5rem;
+}
+
+img {
+  display: block;
+  max-width: 100%;          /* never overflow on small screens */
+  height: auto;
+}
+
+img.photo {
+  width: 100%;
+  object-fit: cover;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Logos stay crisp with no rounding or shadow */
+.site-header img,
+.site-footer img {
+  border-radius: 0;
+  box-shadow: none;
+}
+
+@media (max-width: 767px) {
+  h1 {
+    font-size: 3rem;        /* 48px */
+  }
+
+  h2 {
+    font-size: 2rem;        /* 32px */
+  }
+
+  p.lead {
+    font-size: 1rem;
   }
 }
