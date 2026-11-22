@@ -13,7 +13,7 @@ function CustomersSay() {
         <div className="testimonials-grid">
           {testimonials.map((t) => (
             <article className="testimonial-card" key={t.id}>
-              <p className="stars" aria-label={`${t.rating} out of 5 stars`}>
+              <p className="stars" aria-label={`Rated ${t.rating} out of 5 stars`}>
                 {'★'.repeat(t.rating)}{'☆'.repeat(5 - t.rating)}
               </p>
               <div className="customer">

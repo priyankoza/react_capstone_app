@@ -43,7 +43,7 @@ function Specials() {
             <img className="card-image" src={dish.image} alt={dish.name} />
             <div className="card-body">
               <div className="card-title-row">
-                <h4>{dish.name}</h4>
+                <h3 className="card-title">{dish.name}</h3>
                 <span className="highlight">{dish.price}</span>
               </div>
               <p>{dish.description}</p>

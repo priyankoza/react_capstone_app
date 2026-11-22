@@ -1,12 +1,12 @@
-    import marioAdrianA from './assets/mario-adrian-a.jpg';
+import marioAdrianA from './assets/mario-adrian-a.jpg';
 import marioAdrianB from './assets/mario-adrian-b.jpg';
 
 function Chicago() {
   return (
     <section className="container page-section about-grid">
       <div>
-        <h1 className="about-title">Little Lemon</h1>
-        <h2>Chicago</h2>
+        <h2 className="about-title">Little Lemon</h2>
+        <h3 className="about-subtitle">Chicago</h3>
         <p>
           Little Lemon is owned by two Italian brothers, Mario and Adrian, who
           moved to the United States to pursue their shared dream of owning a
