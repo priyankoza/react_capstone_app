@@ -85,11 +85,6 @@ h1, h2, h3 {
   text-decoration: underline;
 }
 
-/* ===== Main ===== */
-.site-main {
-  padding: 2rem 0;
-}
-
 /* ===== Footer: CSS Grid columns ===== */
 .site-footer {
   background-color: var(--primary-green);
@@ -325,5 +320,233 @@ img.photo {
 
   p.lead {
     font-size: 1rem;
+  }
+}
+
+.page-section {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+
+.button-primary {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  background-color: var(--primary-yellow);
+  color: var(--highlight-dark);
+  font-family: "Karla", sans-serif;
+  font-weight: 700;
+  text-decoration: none;
+  border-radius: 16px;
+  transition: background-color 0.2s ease;
+}
+
+.button-primary:hover,
+.button-primary:focus-visible {
+  background-color: var(--secondary-salmon);
+}
+
+/* ----- CallToAction (hero) ----- */
+.hero {
+  background-color: var(--primary-green);
+  color: var(--highlight-light);
+  padding: 3rem 0;
+}
+
+.hero h2 {
+  color: var(--highlight-light);
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  align-items: center;
+}
+
+.hero-image {
+  max-height: 360px;
+}
+
+/* ----- Specials ----- */
+.section-heading {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.section-heading h2 {
+  margin: 0;
+  color: var(--highlight-dark);
+}
+
+.specials-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--highlight-light);
+  border-radius: 16px 16px 0 0;
+  overflow: hidden;
+}
+
+.card-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  padding: 1.25rem;
+}
+
+.card-title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 0.75rem;
+}
+
+.card-body p {
+  color: var(--primary-green);
+  flex-grow: 1;
+}
+
+.card-link {
+  color: var(--highlight-dark);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.card-link:hover {
+  text-decoration: underline;
+}
+
+/* ----- CustomersSay (testimonials) ----- */
+.testimonials {
+  background-color: var(--highlight-light);
+}
+
+.testimonials h2 {
+  text-align: center;
+}
+
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+.testimonial-card {
+  background-color: #ffffff;
+  padding: 1.25rem;
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.stars {
+  color: var(--primary-yellow);
+  font-size: 1.25rem;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.75rem;
+}
+
+.customer {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.customer h5 {
+  margin: 0;
+}
+
+.avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: var(--primary-green);
+  color: var(--highlight-light);
+  font-weight: 700;
+}
+
+/* ----- Chicago (about) ----- */
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  align-items: center;
+}
+
+.about-title {
+  color: var(--primary-green);
+}
+
+.about-images {
+  position: relative;
+  height: 320px;
+}
+
+.about-images img {
+  position: absolute;
+  width: 65%;
+  height: 240px;
+}
+
+.about-img-back {
+  top: 0;
+  right: 0;
+}
+
+.about-img-front {
+  bottom: 0;
+  left: 0;
+}
+
+/* ----- Tablet and up ----- */
+@media (min-width: 768px) {
+  .hero-grid,
+  .about-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .specials-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .testimonials-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ----- Desktop ----- */
+@media (min-width: 1024px) {
+  .specials-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .testimonials-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .about-images {
+    height: 400px;
+  }
+
+  .about-images img {
+    height: 300px;
   }
 }

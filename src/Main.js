@@ -1,18 +1,26 @@
+import { Routes, Route } from 'react-router-dom';
+import HomePage from './HomePage';
+import BookingPage from './BookingPage';
+import Chicago from './Chicago';
+
+function ComingSoon() {
+  return (
+    <section className="container page-section">
+      <h2>Coming soon</h2>
+      <p>This page is under construction.</p>
+    </section>
+  );
+}
+
 function Main() {
   return (
     <main className="site-main">
-      <div className="container">
-        <h1>Little Lemon</h1>
-        <h2>Chicago</h2>
-        <p className="lead">
-          We are a family owned Mediterranean restaurant, focused on traditional
-          recipes served with a modern twist.
-        </p>
-        <h3>This week's specials</h3>
-        <p>
-          Today's special: <span className="highlight">Greek Salad $12.99</span>
-        </p>
-      </div>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/booking" element={<BookingPage />} />
+        <Route path="/about" element={<Chicago />} />
+        <Route path="*" element={<ComingSoon />} />
+      </Routes>
     </main>
   );
 }
