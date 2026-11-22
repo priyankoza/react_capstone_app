@@ -550,3 +550,47 @@ img.photo {
     height: 300px;
   }
 }
+
+/* ----- Booking form ----- */
+.booking-form {
+  display: grid;
+  max-width: 400px;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+.booking-form label {
+  font-weight: 700;
+  color: var(--primary-green);
+}
+
+.booking-form input,
+.booking-form select {
+  padding: 0.75rem;
+  font-family: "Karla", sans-serif;
+  font-size: 1rem;
+  border: 1px solid var(--primary-green);
+  border-radius: 8px;
+  background-color: #ffffff;
+  margin-bottom: 0.5rem;
+}
+
+.booking-form input:focus,
+.booking-form select:focus {
+  outline: 2px solid var(--primary-yellow);
+  outline-offset: 1px;
+}
+
+.booking-form input[type="submit"] {
+  background-color: var(--primary-yellow);
+  color: var(--highlight-dark);
+  font-weight: 700;
+  border: none;
+  border-radius: 16px;
+  cursor: pointer;
+  margin-top: 0.5rem;
+}
+
+.booking-form input[type="submit"]:hover {
+  background-color: var(--secondary-salmon);
+}
